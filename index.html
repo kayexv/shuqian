@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KSYEXV书签</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- 引入 Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+        import { getDatabase } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+    </script>
+    <style>
+        /* 遮罩层样式 */
+        #password-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        #password-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 300px;
+            box-sizing: border-box;
+        }
+
+        #password-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        #password-submit {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        #password-submit:hover {
+            background-color: #0056b3;
+        }
+
+        #warning-message {
+            color: red;
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 密码输入模态框 -->
+    <div id="password-modal">
+        <div id="password-container">
+            <!-- 添加警告信息 -->
+            <p id="warning-message">个人网页，勿扰</p>
+            <input type="password" id="password-input" placeholder="输入密码">
+            <button id="password-submit">提交</button>
+        </div>
+    </div>
+
+    <!-- 书签页面内容，初始隐藏 -->
+    <div id="bookmark-page" style="display: none;">
+        <h1>KSYEXV书签</h1>
+        <div class="input-container">
+            <input type="text" id="bookmarkName" placeholder="书签名称">
+            <input type="text" id="bookmarkUrl" placeholder="书签链接">
+            <button id="addBookmark">添加书签</button>
+            <input type="file" id="importBookmarks" accept=".html">
+            <button id="processImport">导入书签</button>
+        </div>
+        <ul id="bookmarkList"></ul>
+    </div>
+
+    <script type="module" src="script.js"></script>
+    <script>
+        const passwordModal = document.getElementById('password-modal');
+        const passwordInput = document.getElementById('password-input');
+        const passwordSubmit = document.getElementById('password-submit');
+        const bookmarkPage = document.getElementById('bookmark-page');
+
+        passwordSubmit.addEventListener('click', () => {
+            const password = passwordInput.value;
+            if (password === '111111111') {
+                passwordModal.style.display = 'none';
+                bookmarkPage.style.display = 'block';
+            } else {
+                alert('密码错误，请重新输入。');
+                passwordInput.value = '';
+            }
+        });
+    </script>
+</body>
+
+</html>
